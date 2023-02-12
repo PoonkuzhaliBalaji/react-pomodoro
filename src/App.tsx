@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { TimerContext, useInterval } from './components/Timer';
+import MainComponent from './MainComponent';
+import QuoteGenerator from './pomodoroComponents/QuoteGenerator';
+import TaskCompletion from './pomodoroComponents/TaskCompletion';
+import TodoList from './pomodoroComponents/TodoList';
 
-function App() {
+const App = () => {
+  const [timer, setTimer] = useState(0);
+
+  const setInitialTimer = useCallback((timer: number) => {
+    setTimer(timer);
+  },[setTimer]);
+
+  useInterval(() => {
+    if(timer > 0) {
+      setTimer(timer - 1);
+    }
+  }, 1000);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TimerContext.Provider
+      value={{
+        timer,
+        setInitialTimer
+      }}>
+      <Routes>
+        <Route path="/" element={<MainComponent />} />
+        <Route path="todo_list" element={<TodoList />} />
+        <Route path="quote_generator" element={<QuoteGenerator />} />
+        <Route path="completion_percentage" element={<TaskCompletion />} />
+      </Routes>
+    </TimerContext.Provider>
   );
-}
+};
 
 export default App;

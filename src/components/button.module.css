@@ -1,0 +1,26 @@
+.primary {
+    background-color: rgb(26,223,235);
+    border: 2px solid black;
+    color: black;
+    font-weight: bold;
+    height: 50px;
+    width: 300px;
+}
+
+.primarylink {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    font-weight: bold;
+    height: 50px;
+    margin-left: 20px;
+}
+
+.secondarylink {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    height: 50px;
+    margin-left: 20px;
+}

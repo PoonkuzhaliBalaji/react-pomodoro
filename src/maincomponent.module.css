@@ -1,0 +1,13 @@
+.imageContainer {
+    margin: 50px;
+    display: flex;
+}
+.description {
+    background-color: aliceblue;
+    margin-left: 50px;
+    padding: 30px;
+}
+.buttonContainer {
+    text-align: right;
+    padding-right: 50px;
+}

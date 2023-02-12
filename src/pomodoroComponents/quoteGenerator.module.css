@@ -1,0 +1,27 @@
+.quoteContainer {
+    text-align: center;
+    margin: 40px;
+}
+
+.buttonContainer {
+    margin-top: 20px;
+}
+
+.division {
+    display: flex;
+    margin: 40px;
+    justify-content: space-between;
+}
+
+.quoteArea {
+    padding: 70px;
+    height: 80px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: lightcyan;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: Copperplate, Papyrus, fantasy;
+    font-size: 20px;
+    overflow: scroll;
+}

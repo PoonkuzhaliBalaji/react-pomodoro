@@ -1,0 +1,23 @@
+.completion {
+    text-align: center;
+    font-size: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: rgb(18, 160, 167);
+    margin: 100px;
+}
+
+.percentage {
+    color: black;
+    font-size: 60px;
+}
+
+.comments {
+    color: red;
+    font-size: 30px;
+    font-family: Copperplate, Papyrus, fantasy;
+    margin-top: 50px;
+    border: 5px solid black;
+    border-radius: 10px;
+    padding: 10px
+}
