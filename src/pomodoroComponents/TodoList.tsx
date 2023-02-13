@@ -1,11 +1,13 @@
 import commonStyles from '../main.module.css';
 import styles from './todolist.module.css';
 import { Formik, FieldArray } from 'formik';
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import { Select, Input, message } from 'antd';
 import Button from '../components/Button';
 import { Header } from '../components/Header';
 import { todo } from '../constants/textConstants';
+import { useNavigate } from 'react-router-dom';
+import { TimerContext } from '../components/Timer';
 
 interface FormInitialValueType {
   tasks: string[];
@@ -72,6 +74,23 @@ const AddTask = ({ addTask, removeTask, taskIndex, handleChange, task }: AddTask
 };
 
 const TodoList = () => {
+  const navigate = useNavigate();
+  const { setInitialTimer } = useContext(TimerContext);
+
+  const createListAndStartTimer = useCallback(
+    (values: FormInitialValueType) => {
+      const { hours, tasks } = values;
+      if (tasks[0] === '') {
+        message.warning('You need atleast a task to start working');
+      } else {
+        // TODO: add to db [values]
+        setInitialTimer(+hours * 3600);
+        navigate(`/working?timer=${+hours * 3600}`);
+      }
+    },
+    [navigate]
+  );
+
   return (
     <div className={commonStyles.container}>
       <Header />
@@ -104,6 +123,11 @@ const TodoList = () => {
                   })
                 }
               </FieldArray>
+              <div id="start_timer_button" className={styles.buttonContainer}>
+                <Button type="ghost" onClick={() => createListAndStartTimer(values)}>
+                  {todo.buttonText}
+                </Button>
+              </div>
             </>
           );
         }}

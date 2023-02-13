@@ -8,11 +8,12 @@ type ButtonProps = {
   className?: string;
   children: string;
   onClick?: () => void;
+  disabled?: boolean
 };
 
-const Button = ({ type, className = 'primary', children, onClick }: ButtonProps) => {
+const Button = ({ type, className = 'primary', children, onClick, disabled }: ButtonProps) => {
   return (
-    <AntdButton type={type} className={styles[className]} onClick={onClick}>
+    <AntdButton type={type} className={styles[className]} onClick={onClick} disabled={disabled}>
       {children}
     </AntdButton>
   );

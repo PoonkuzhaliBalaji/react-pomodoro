@@ -14,7 +14,8 @@ export const dashboard = {
 
 export const todo = {
   title: 'CREATE A TODO LIST FOR',
-  hourTitle: 'SELECT THE TIME FOR CONSECUTIVE CONCENTRATION (In hours)'
+  hourTitle: 'SELECT THE TIME FOR CONSECUTIVE CONCENTRATION (In hours)',
+  buttonText: 'Start My Work..'
 };
 
 export const quoteGen = {
@@ -30,5 +31,12 @@ export const completion = {
   per2: 'Need more concentration',
   per3: 'Good work, Keep improving further',
   per4: 'You are almost on completion track. Try full completion in the next cycle',
-  per5: 'Kudos! Perfect concentration and you have completed your tasks, Carry on..'
+  per5: 'Kudos! Perfect concentration and you have completed your tasks, Carry on..',
+  redirectToDo: 'Add tasks for next cycle >>>',
+  noOfCompleted: 'How many tasks are completed ?',
+  null: 'No progress :( Better luck in the upcoming tasks'
 };
+
+export const timerText = {
+  leftTime: 'YOU HAVE 25 MINUTES FOR THE FIRST CYCLE OF WORK'
+}

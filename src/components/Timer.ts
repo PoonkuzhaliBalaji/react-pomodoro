@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useEffect } from 'react';
+import { createContext, useRef, useEffect } from 'react';
 
 interface TimerContextPropType {
   timer: number;
@@ -9,10 +9,6 @@ export const TimerContext = createContext<TimerContextPropType>({
   timer: 0,
   setInitialTimer: () => {}
 });
-
-export function useTimer() {
-  return useContext(TimerContext);
-}
 
 export function useInterval(callback: Function, delay: number) {
   const savedTimerCallback = useRef<any>(null);

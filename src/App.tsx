@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { TimerContext, useInterval } from './components/Timer';
 import MainComponent from './MainComponent';
+import EmptyTimerScreen from './pomodoroComponents/EmptyTimerScreen';
 import QuoteGenerator from './pomodoroComponents/QuoteGenerator';
 import TaskCompletion from './pomodoroComponents/TaskCompletion';
 import TodoList from './pomodoroComponents/TodoList';
@@ -11,7 +12,7 @@ const App = () => {
 
   const setInitialTimer = useCallback((timer: number) => {
     setTimer(timer);
-  },[setTimer]);
+  },[setTimer, timer]);
 
   useInterval(() => {
     if(timer > 0) {
@@ -28,6 +29,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainComponent />} />
         <Route path="todo_list" element={<TodoList />} />
+        <Route path="working" element={<EmptyTimerScreen/>}/>
         <Route path="quote_generator" element={<QuoteGenerator />} />
         <Route path="completion_percentage" element={<TaskCompletion />} />
       </Routes>
