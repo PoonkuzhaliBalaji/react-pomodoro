@@ -8,6 +8,8 @@ import { Header } from '../components/Header';
 import { todo } from '../constants/textConstants';
 import { useNavigate } from 'react-router-dom';
 import { TimerContext } from '../components/Timer';
+import { useIndexedDB } from 'react-indexed-db';
+
 
 interface FormInitialValueType {
   tasks: string[];
@@ -77,13 +79,22 @@ const TodoList = () => {
   const navigate = useNavigate();
   const { setInitialTimer } = useContext(TimerContext);
 
+  const db = useIndexedDB('tasks');
+
   const createListAndStartTimer = useCallback(
     (values: FormInitialValueType) => {
       const { hours, tasks } = values;
       if (tasks[0] === '') {
         message.warning('You need atleast a task to start working');
       } else {
-        // TODO: add to db [values]
+        tasks.map((item) => {
+          const obj = {
+            task: item
+          }
+          db.add(obj).then(() => {
+            message.success('Task list created');
+          })
+        })
         setInitialTimer(+hours * 3600);
         navigate(`/working?timer=${+hours * 3600}`);
       }

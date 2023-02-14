@@ -34,7 +34,8 @@ export const completion = {
   per5: 'Kudos! Perfect concentration and you have completed your tasks, Carry on..',
   redirectToDo: 'Add tasks for next cycle >>>',
   noOfCompleted: 'How many tasks are completed ?',
-  null: 'No progress :( Better luck in the upcoming tasks'
+  null: 'No progress :( Better luck in the upcoming tasks',
+  checkPercentage: 'Check completion ratio'
 };
 
 export const timerText = {

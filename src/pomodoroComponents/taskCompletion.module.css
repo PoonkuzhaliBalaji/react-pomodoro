@@ -29,3 +29,10 @@
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.taskListDisplay {
+    font-size: 20px;
+    display: flex;
+    font-weight: 500;
+    text-transform: uppercase;
+}

@@ -5,66 +5,71 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import { quoteGen } from '../constants/textConstants';
 import Button from '../components/Button';
-import { libraryList } from '../constants/libraryList';
 import commonStyles from '../main.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TimerContext } from '../components/Timer';
 import TimerComponent from './TimerComponent';
+import { useIndexedDB } from 'react-indexed-db';
 
 const { TextArea } = Input;
 
 const QuoteGenerator = () => {
-  const [randomQuoteToDisplay, setRandomQuoteToDisplay] = useState<string>(libraryList[0]);
+  const [randomQuoteToDisplay, setRandomQuoteToDisplay] = useState<string>('Click on view');
   const navigate = useNavigate();
   const { timer, setInitialTimer } = useContext(TimerContext);
+
+  const db = useIndexedDB('quotes');
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
-  
+
   const query = useQuery();
   const passedTime = query.get('timer');
   const contantContrationTime = 300; // 5 min * 60
   const timeToRedirect = passedTime ? +passedTime - contantContrationTime : 0;
 
   useEffect(() => {
-    if(timer === 0) {
-      setInitialTimer(0)
+    if (timer === 0) {
+      setInitialTimer(0);
       navigate(`/completion_percentage`);
       return;
     }
-    if(timeToRedirect === timer) {
-        navigate(`/working?timer=${timer}`);
+    if (timeToRedirect === timer) {
+      navigate(`/working?timer=${timer}`);
     }
-  },[passedTime, contantContrationTime, timeToRedirect, timer]);
+  }, [passedTime, contantContrationTime, timeToRedirect, timer]);
 
   const formik = useFormik({
     initialValues: {
       quotes: '',
-      library: libraryList
     },
     onSubmit: () => {}
   });
 
   const { handleChange, values, setFieldValue } = formik;
-  const { library, quotes } = values;
+  const { quotes } = values;
 
   const addToLibrary = useCallback(() => {
     if (quotes === '') {
       message.warning('Write a thought to add to the library');
     } else {
-      // TODO: Store quotes in db
-      setFieldValue('library', [...library, quotes]);
-      message.success('Added to the library !');
-      setFieldValue('quotes', '');
+      db.add({ quote: quotes }).then(() => {
+        message.success('Added to the library !');
+        setFieldValue('quotes', '');
+      });
     }
-  }, [library, quotes]);
+  }, [db, quotes]);
+
 
   const viewSomeFromLibrary = useCallback(() => {
-    const randomQuote = Math.floor(Math.random() * library.length);
-    // TODO: Fetch quotes from db
-    setRandomQuoteToDisplay(library[randomQuote]);
-  }, [library, setRandomQuoteToDisplay]);
+    db.getAll().then((quotes: string[]) => {
+      const randomQuote = Math.floor(Math.random() * quotes.length);
+      db.getByID(randomQuote).then((quoteFromDb: {quote: string, id: number}) => {
+        setRandomQuoteToDisplay(quoteFromDb.quote);
+      });
+    });
+  }, [db, setRandomQuoteToDisplay]);
 
   return (
     <div className={commonStyles.container}>
