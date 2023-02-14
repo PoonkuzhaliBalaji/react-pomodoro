@@ -13,7 +13,7 @@ This web application is normally like a work tracker. The user can add a to-do l
 In the project directory, you can run:
 
 npm install \
-npm start \
+npm start 
 
 
 Runs the app in the development mode.\
