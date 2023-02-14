@@ -12,8 +12,9 @@ This web application is normally like a work tracker. The user can add a to-do l
 
 In the project directory, you can run:
 
-### `npm install`
-### `npm start`
+npm install \
+npm start \
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
