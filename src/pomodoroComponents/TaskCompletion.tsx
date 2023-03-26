@@ -91,7 +91,7 @@ const TaskCompletion = () => {
       {openPercentage && (
         <div className={styles.completion}>
           <p>{completion.title}</p>
-          <p className={styles.percentage}>{completionPercentage} %</p>
+          <p className={styles.percentage}>{Number(completionPercentage).toFixed(1)} %</p>
           <p className={styles.comments}>{PerformanceTrack(completionPercentage)}</p>
 
           <Button type="ghost" className="primarylink" onClick={closeTask}>

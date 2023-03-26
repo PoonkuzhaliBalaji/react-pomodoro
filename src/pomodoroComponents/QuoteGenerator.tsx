@@ -13,6 +13,11 @@ import { useIndexedDB } from 'react-indexed-db';
 
 const { TextArea } = Input;
 
+interface QuoteObject {
+  id: number;
+  quote: string;
+}
+
 const QuoteGenerator = () => {
   const [randomQuoteToDisplay, setRandomQuoteToDisplay] = useState<string>('Click on view');
   const navigate = useNavigate();
@@ -63,11 +68,9 @@ const QuoteGenerator = () => {
 
 
   const viewSomeFromLibrary = useCallback(() => {
-    db.getAll().then((quotes: string[]) => {
+    db.getAll().then((quotes: QuoteObject[]) => {
       const randomQuote = Math.floor(Math.random() * quotes.length);
-      db.getByID(randomQuote).then((quoteFromDb: {quote: string, id: number}) => {
-        setRandomQuoteToDisplay(quoteFromDb.quote);
-      });
+      setRandomQuoteToDisplay(quotes[randomQuote].quote);
     });
   }, [db, setRandomQuoteToDisplay]);
 

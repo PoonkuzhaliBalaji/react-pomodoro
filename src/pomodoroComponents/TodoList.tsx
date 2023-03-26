@@ -65,7 +65,7 @@ const AddTask = ({ addTask, removeTask, taskIndex, handleChange, task }: AddTask
         onChange={handleChange(`tasks[${taskIndex}]`)}
         value={task}
       />
-      <Button type="ghost" onClick={() => addTask(taskIndex)} className="primarylink">
+      <Button type="ghost" onClick={() => addTask(taskIndex + 1)} className="primarylink">
         Add Task
       </Button>
       <Button type="ghost" onClick={removeSection} className="secondarylink">
@@ -84,8 +84,9 @@ const TodoList = () => {
   const createListAndStartTimer = useCallback(
     (values: FormInitialValueType) => {
       const { hours, tasks } = values;
-      if (tasks[0] === '') {
-        message.warning('You need atleast a task to start working');
+      const isEmptyTask = tasks.some((item) => item === undefined || item === '');
+      if (isEmptyTask) {
+        message.warning('Give valid tasks to start working');
       } else {
         tasks.map((item) => {
           const obj = {
