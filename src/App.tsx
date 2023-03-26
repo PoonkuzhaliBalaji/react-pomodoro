@@ -7,7 +7,7 @@ import QuoteGenerator from './pomodoroComponents/QuoteGenerator';
 import TaskCompletion from './pomodoroComponents/TaskCompletion';
 import TodoList from './pomodoroComponents/TodoList';
 import { initDB, useIndexedDB } from 'react-indexed-db';
-import { DbConfig } from './Database/dbConfig';
+import { DbConfig } from './database/dbConfig';
 import { libraryList } from './constants/libraryList';
 
 initDB(DbConfig);
